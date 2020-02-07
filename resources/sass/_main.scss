@@ -1,0 +1,43 @@
+// Loader
+#loader
+ {
+  background: rgba(0,0,0,.4);
+  z-index: 3;
+ }
+
+ .linePreloader{
+  height:3px;
+  background: linear-gradient(to right,var(--primary),var(--primary));
+  background-color:#fff;
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-size:20%;
+  background-repeat:repeat-y;
+  background-position:-25% 0;
+  animation:scroll 1.2s ease-in-out infinite;
+}
+
+@keyframes scroll{
+  50%{background-size:80%}
+  100%{background-position:125% 0;}
+}
+
+
+.top-0 {
+  top: 0 !important;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.bottom-0 {
+  bottom: 0;
+}

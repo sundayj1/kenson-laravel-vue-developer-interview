@@ -4,9 +4,30 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// iport bootstrap
+import './bootstrap';
+// import Vue
+import Vue     from 'vue';
+// Load Vuetify
+import Vuetify from 'vuetify';
+// import toasted
+import Toasted            from 'vue-toasted';
+// Import Vue Store
+import Store   from '@/js/store/index';
+// Route paths for Vue Router
+import Routes  from '@/js/router.js';
+// App template
+import App     from '@/js/components/App';
 
-window.Vue = require('vue');
+Vue.use(Toasted, {
+	theme: "toasted-primary",
+	position: "bottom-center",
+	duration : 5000,
+    keepOnHover: true,
+    iconPack : 'material-icons'
+});
+// Register plugins
+Vue.use(Vuetify);
 
 /**
  * The following block of code may be used to automatically register your
@@ -16,17 +37,19 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Pass vuex store to browser
+window.$store = Store;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-const app = new Vue({
-    el: '#app',
-});
+new Vue({
+  router: Routes,
+  render: h => h(App),
+  Store
+}).$mount('#app');

@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Handle contact us form
+Route::post('/contact', 'UserController@contact')->name('contact');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+// SPA Controller
+Route::get('/{any}', 'SpaController@index')->where('any', '.*');

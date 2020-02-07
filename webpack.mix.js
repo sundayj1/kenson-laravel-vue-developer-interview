@@ -11,5 +11,31 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.webpackConfig({
+    resolve: {
+      extensions: ['.js', '.vue'],
+      alias: {
+        '@': __dirname + '/resources'
+      }
+    },
+    module:
+    {
+      rules: [
+        {
+          test: /\.pug$/,
+          loader: 'pug-plain-loader'
+        }
+      ]
+    }
+  })
+  // Proxy server
+  .browserSync('kenson.dev')
+  // Compile Js
+  .js('resources/js/app.js', 'public/js')
+  // Compile CSS
+  .sass('resources/sass/app.scss', 'public/css')
+  // Assets versioning
+  .version()
+  // Disable mix notifications
+  .disableNotifications();
+

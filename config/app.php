@@ -123,6 +123,16 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    // These are rules we're validating against for incoming requests
+    'rules'     => [
+      'name'           => 'bail|sometimes|required|string',
+      'email'          => 'bail|sometimes|required|email|unique:users',
+      'phone'          => 'bail|sometimes|required||unique:users|regex:/[\(][0-9]{3}[\)] [0-9]{3}-[0-9]{4}/',
+      'address'        => 'bail|sometimes|required|string',
+      'zip_code'       => 'bail|sometimes|required|string|size:5',
+      'attachment.*'   => 'bail|sometimes|required|file|mimes:jpeg,jpg,png,gif,pdf',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
